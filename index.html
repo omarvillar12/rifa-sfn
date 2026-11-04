@@ -3,582 +3,196 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SfN 2026 – Rifa</title>
-<meta name="description" content="Rifa para apoyar mi participación en Neuroscience 2026. Elige tu número: $100.">
-<meta property="og:title" content="SfN 2026 – Rifa">
-<meta property="og:description" content="Ayúdame a llegar a Neuroscience 2026. Elige tu número por $100.">
+<title>SfN 2026 – Rifa · ¡Gracias!</title>
+<meta name="description" content="¡Se agotaron los números! Gracias por apoyar mi participación en Neuroscience 2026. Sorteo en vivo el sábado 21 de noviembre.">
+<meta property="og:title" content="¡Gracias! Se agotaron los números de la rifa">
+<meta property="og:description" content="Gracias por apoyar mi participación en Neuroscience 2026. Sorteo en vivo el sábado 21 de noviembre.">
 <meta name="theme-color" content="#1c2333">
 <style>
   :root{
-    --bg:#f6f3ee; --card:#ffffff; --ink:#1c2333; --ink-2:#4a5266; --ink-3:#7d8496;
-    --line:#e3ded5; --accent:#d9442b; --accent-ink:#ffffff; --accent-soft:#fbe4de;
-    --held:#fbefd2; --held-ink:#8a6100; --sold:#ebe8e2; --sold-ink:#b2ada3;
-    --ok:#1f8a5b; --ok-soft:#e1f3ea; --radius:14px;
-    --shadow:0 1px 2px rgba(28,35,51,.06),0 6px 20px rgba(28,35,51,.06);
+    --bg:#f6f3ee; --card:#ffffff; --ink:#1c2333; --ink-2:#4a5266; --ink-3:#6b7283;
+    --line:#e3ded5; --accent:#d9442b; --accent-2:#ff8f78; --soft:#f3b3a6;
+    --held:#fbefd2; --held-ink:#7a5600; --ok:#1f8a5b; --ok-soft:#e1f3ea;
+    --radius:16px; --shadow:0 1px 2px rgba(28,35,51,.06),0 6px 20px rgba(28,35,51,.06);
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{background:var(--bg);color:var(--ink);
-    font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;padding-bottom:110px}
-  body.lock{overflow:hidden}
-  .wrap{max-width:560px;margin:0 auto;padding:16px}
-  button{font:inherit;color:inherit}
-  .num,.mono{font-variant-numeric:tabular-nums}
-
-  /* ---------- Boleto (encabezado) ---------- */
-  .ticket{position:relative;background:var(--ink);color:#fff;border-radius:var(--radius);
-    padding:22px 20px 18px;box-shadow:var(--shadow);overflow:hidden}
-  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#f3b3a6;font-weight:700}
-  h1{margin:4px 0 14px;font-size:26px;line-height:1.15;letter-spacing:-.01em}
-  .label{display:block;color:#aab1c3;font-size:12px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
-  .prizes{list-style:none;margin:0;padding:0;display:grid;gap:9px}
-  .prizes li{display:flex;align-items:center;gap:12px;font-weight:650;font-size:16px;line-height:1.25}
-  .medal{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
-    font-size:13px;font-weight:800;color:var(--ink)}
-  .medal.m1{background:#f2c94c}.medal.m2{background:#d5d9e0}.medal.m3{background:#e0a47a}
-  .medal.mx{background:#aab1c3}
-  .perf{position:relative;border-top:2px dashed rgba(255,255,255,.18);margin:18px -20px 0}
-  .perf::before,.perf::after{content:"";position:absolute;top:-12px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
-  .perf::before{left:-11px}.perf::after{right:-11px}
-  .facts{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;padding-top:14px;font-size:14px}
+    font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:560px;margin:0 auto;padding:16px 16px 32px}
+  .num{font-variant-numeric:tabular-nums}
 
   .cover{display:block;width:100%;height:auto;max-height:420px;object-fit:cover;border-radius:var(--radius);
     box-shadow:var(--shadow);margin-bottom:14px;background:#e7e2d9}
-  .org{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:14px 16px;margin-top:14px}
-  .org img{flex:none;width:64px;height:64px;border-radius:50%;object-fit:cover;background:#e7e2d9}
-  .org small{display:block;color:var(--ink-3);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
-  .org b{display:block;font-size:16px}
-  .org p{margin:3px 0 0;color:var(--ink-2);font-size:14px}
-  .facts dt{color:#aab1c3}.facts dd{margin:0}
-  .price{font-size:20px;font-weight:700;color:#fff}
 
-  /* ---------- Progreso ---------- */
-  .progress{margin:16px 2px 6px}
-  .progress-row{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-2);margin-bottom:6px}
-  .progress-row b{color:var(--ink)}
-  .bar{height:8px;background:#e7e2d9;border-radius:99px;overflow:hidden;display:flex}
-  .bar i{display:block;height:100%;transition:width .5s ease}
-  .bar .p{background:var(--ink)}.bar .a{background:#e3b44f}
+  /* ---------- Agradecimiento ---------- */
+  .hero{position:relative;background:var(--ink);color:#fff;border-radius:var(--radius);padding:26px 22px 22px;
+    box-shadow:var(--shadow);overflow:hidden}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft);font-weight:800}
+  .badge{display:inline-flex;align-items:center;gap:8px;margin:14px 0 6px;padding:6px 12px;border-radius:99px;
+    background:rgba(255,143,120,.16);color:var(--accent-2);font-weight:800;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+  h1{margin:0 0 12px;font-size:32px;line-height:1.1;letter-spacing:-.01em}
+  h1 span{color:var(--accent-2)}
+  .hero p{margin:0 0 10px;color:#d6dae4;font-size:16px}
+  .hero p.strong{color:#fff;font-weight:700}
+  .sign{display:flex;align-items:center;gap:14px;margin-top:18px;padding-top:16px;border-top:2px dashed rgba(255,255,255,.18)}
+  .sign img{flex:none;width:60px;height:60px;border-radius:50%;object-fit:cover;object-position:center top;background:#2b3245}
+  .sign b{display:block;font-size:16px}
+  .sign small{display:block;color:#aab1c3;font-size:13px}
 
-  /* ---------- Cuadrícula ---------- */
-  .panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-top:14px}
-  .panel h2{margin:0 0 4px;font-size:17px}
-  .hint{margin:0 0 12px;color:var(--ink-2);font-size:14px}
-  .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--ink-2);margin-bottom:12px}
+  /* ---------- Tarjetas ---------- */
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin-top:14px}
+  .card h2{margin:0 0 12px;font-size:17px}
+  .when{display:flex;gap:14px;align-items:center}
+  .cal{flex:none;width:66px;border-radius:12px;overflow:hidden;text-align:center;border:1px solid var(--line)}
+  .cal .m{background:var(--accent);color:#fff;font-size:12px;font-weight:800;letter-spacing:.1em;padding:3px 0}
+  .cal .d{font-size:28px;font-weight:800;padding:4px 0 2px;line-height:1.1}
+  .cal .w{font-size:11px;color:var(--ink-3);font-weight:700;padding-bottom:6px;text-transform:uppercase}
+  .when p{margin:0;color:var(--ink-2);font-size:14.5px}
+  .when p b{color:var(--ink)}
+  .prizes{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+  .prizes li{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15.5px;line-height:1.25}
+  .medal{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--ink)}
+  .m1{background:#f2c94c}.m2{background:#d5d9e0}.m3{background:#e0a47a}
+  .order{margin:12px 0 0;font-size:13.5px;color:var(--ink-3)}
+
+  .pay{background:var(--held);border-radius:var(--radius);padding:16px 18px;margin-top:14px;color:#5c4100}
+  .pay h2{margin:0 0 6px;font-size:16px;color:#4a3500}
+  .pay p{margin:0 0 12px;font-size:14.5px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;
+    padding:12px 18px;font:inherit;font-weight:700;font-size:15px;text-decoration:none;cursor:pointer}
+  .btn-wa{background:#1fa855;color:#fff;width:100%}
+
+  /* ---------- Números participantes ---------- */
+  .legend{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--ink-2);margin:0 0 12px}
   .legend span{display:inline-flex;align-items:center;gap:6px}
-  .sw{width:14px;height:14px;border-radius:4px;border:1px solid var(--line);display:inline-block}
-  .sw.l{background:#fff}.sw.s{background:var(--accent);border-color:var(--accent)}
-  .sw.a{background:var(--held);border-color:#efd9a2}.sw.p{background:var(--sold);border-color:var(--sold)}
+  .sw{width:14px;height:14px;border-radius:4px;display:inline-block;border:1px solid var(--line)}
+  .sw.p{background:var(--ink);border-color:var(--ink)}.sw.a{background:var(--held);border-color:#efd9a2}.sw.l{background:#fff}
   .grid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
-  .cell{aspect-ratio:1;min-width:0;border:1px solid var(--line);background:#fff;border-radius:8px;
-    font-weight:650;font-size:clamp(12px,3.6vw,15px);cursor:pointer;padding:0;
-    transition:transform .12s ease,background .15s ease,color .15s ease;-webkit-tap-highlight-color:transparent}
-  .cell:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
-  .cell:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-  .cell.sel{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);transform:scale(1.06)}
-  .cell.sel:hover{color:var(--accent-ink)}
-  .cell.a{background:var(--held);border-color:#efd9a2;color:var(--held-ink);cursor:not-allowed}
-  .cell.p{background:var(--sold);border-color:var(--sold);color:var(--sold-ink);cursor:not-allowed;text-decoration:line-through}
+  .cell{aspect-ratio:1;min-width:0;display:grid;place-items:center;border-radius:8px;border:1px solid var(--line);
+    background:#fff;color:var(--ink-3);font-weight:700;font-size:clamp(11px,3.4vw,14px)}
+  .cell.p{background:var(--ink);border-color:var(--ink);color:#fff}
+  .cell.a{background:var(--held);border-color:#efd9a2;color:var(--held-ink)}
   .cell.sk{background:linear-gradient(90deg,#f1ede6,#f8f5f0,#f1ede6);background-size:200% 100%;
-    animation:sk 1.2s infinite linear;border-color:transparent;cursor:default}
+    animation:sk 1.2s infinite linear;border-color:transparent}
   @keyframes sk{to{background-position:-200% 0}}
-  .closed{margin-top:12px;padding:12px;border-radius:10px;background:var(--sold);color:var(--ink-2);text-align:center;font-weight:600}
-  .loaderr{text-align:center;padding:20px 8px;color:var(--ink-2)}
+  .counts{margin:12px 0 0;font-size:13.5px;color:var(--ink-2)}
+  .counts b{color:var(--ink)}
 
-  /* ---------- Barra inferior ---------- */
-  .dock{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-    background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);
-    transform:translateY(110%);transition:transform .25s ease,visibility 0s .25s;visibility:hidden;z-index:20}
-  .dock.on{transform:none;visibility:visible;transition:transform .25s ease}
-  .dock-in{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px}
-  .dock-txt{flex:1;min-width:0}
-  .dock-txt b{display:block;font-size:16px}
-  .dock-txt span{display:block;color:var(--ink-2);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
-  .btn{border:0;border-radius:12px;padding:13px 20px;font-weight:700;font-size:15px;cursor:pointer;
-    display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
-  .btn-primary{background:var(--accent);color:#fff}
-  .btn-primary:disabled{opacity:.6;cursor:progress}
-  .btn-ghost{background:transparent;color:var(--ink-2);border:1px solid var(--line)}
-  .btn-wa{background:#1fa855;color:#fff}
-  .btn-block{width:100%}
-  .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.45);border-top-color:#fff;border-radius:50%;
-    animation:rot .7s linear infinite;display:none}
-  .busy .spin{display:inline-block}
-  @keyframes rot{to{transform:rotate(360deg)}}
-
-  /* ---------- Modal ---------- */
-  .overlay{position:fixed;inset:0;background:rgba(20,24,35,.55);display:none;z-index:30;
-    align-items:flex-end;justify-content:center}
-  .overlay.on{display:flex}
-  .sheet{background:var(--card);width:100%;max-width:560px;max-height:92vh;overflow:auto;
-    border-radius:20px 20px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));
-    animation:up .22s ease}
-  @media(min-width:620px){.overlay{align-items:center}.sheet{border-radius:20px}}
-  @keyframes up{from{transform:translateY(30px);opacity:.4}}
-  .sheet h3{margin:0 0 6px;font-size:20px}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
-  .chip{background:var(--accent-soft);color:var(--accent);font-weight:700;border-radius:8px;padding:5px 10px;font-size:15px}
-  .chip.ok{background:var(--ok-soft);color:var(--ok)}
-  .total{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;
-    border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:16px}
-  .total b{font-size:22px}
-  label.f{display:block;font-weight:600;font-size:14px;margin:0 0 6px}
-  input.in{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #d6d0c5;border-radius:10px;
-    background:#fff;color:var(--ink);margin-bottom:14px}
-  input.in:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-  .check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--ink-2);margin:2px 0 16px}
-  .check input{margin-top:2px;width:18px;height:18px;accent-color:var(--accent);flex:none}
-  .err{display:none;background:#fdecea;color:#a3271a;border-radius:10px;padding:10px 12px;font-size:14px;margin-bottom:14px}
-  .err.on{display:block}
-  .row{display:flex;gap:10px}
-  .row .btn{flex:1}
-
-  .done-ic{width:54px;height:54px;border-radius:50%;background:var(--ok-soft);display:grid;place-items:center;margin-bottom:12px}
-  .folio{display:inline-block;margin-top:2px;font-size:13px;color:var(--ink-2)}
-  .folio b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink);font-size:15px;letter-spacing:.04em}
-  .pay{background:#faf8f4;border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
-  .pay h4{margin:0 0 10px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
-  .pay-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
-  .pay-row:first-of-type{border-top:0}
-  .pay-row span{color:var(--ink-2)}
-  .pay-row b{text-align:right;word-break:break-all}
-  .copy{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 9px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink-2);flex:none}
-  .copy.ok{color:var(--ok);border-color:var(--ok)}
-  .warn{background:var(--held);color:#6b4b00;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-bottom:14px}
-  .stack{display:grid;gap:10px}
-
-  .toast{position:fixed;left:50%;top:14px;transform:translate(-50%,-220%);background:var(--ink);color:#fff;
-    padding:11px 16px;border-radius:12px;font-size:14px;max-width:min(92vw,480px);z-index:40;
-    box-shadow:var(--shadow);transition:transform .25s ease,visibility 0s .25s;visibility:hidden}
-  .toast.on{transform:translate(-50%,0);visibility:visible;transition:transform .25s ease}
-
-  footer{text-align:center;color:var(--ink-3);font-size:12.5px;margin:20px 0 0;padding:0 8px}
+  footer{text-align:center;color:var(--ink-3);font-size:12.5px;margin:22px 0 0;padding:0 8px}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <img class="cover" id="portada" alt="" hidden>
-  <header class="ticket">
-    <div class="eyebrow">Rifa</div>
-    <h1 id="titulo">Cargando…</h1>
-    <span class="label">Premios</span>
-    <ol class="prizes" id="premios"></ol>
-    <div class="perf"></div>
-    <dl class="facts">
-      <dt>Precio</dt><dd><span class="price num" id="precio">—</span> por número</dd>
-      <dt>Sorteo</dt><dd id="fecha">—</dd>
-      <dt>Método</dt><dd id="metodo">—</dd>
-    </dl>
+  <img class="cover" id="portada" src="portada.jpg" alt="Neuroscience 2026, Washington D.C., 14 al 18 de noviembre">
+
+  <header class="hero">
+    <div class="eyebrow">Rifa · SfN 2026</div>
+    <div class="badge">Números agotados</div>
+    <h1>¡Gracias, <span>de corazón!</span></h1>
+    <p>Se vendieron los 150 números. Gracias a cada persona que compró un boleto, que lo compartió o que me escribió para apoyarme.</p>
+    <p class="strong">Gracias a ustedes podré presentar mi trabajo de investigación sobre epilepsia en Neuroscience 2026, en Washington D.C. Es un gran paso para mi carrera y no habría sido posible sin su apoyo.</p>
+    <div class="sign">
+      <img id="retrato" src="retrato.jpg" alt="Dr. Omar Villa Robledo">
+      <div><b>Dr. Omar Villa Robledo</b><small>Con gratitud</small></div>
+    </div>
   </header>
 
-  <section class="org" id="orgCard" hidden>
-    <img id="retrato" alt="" hidden>
-    <div><small>Organiza</small><b id="orgNombre"></b><p id="causa" hidden></p></div>
+  <section class="card" aria-labelledby="t-sorteo">
+    <h2 id="t-sorteo">El sorteo</h2>
+    <div class="when">
+      <div class="cal" aria-hidden="true"><div class="m">NOV</div><div class="d">21</div><div class="w">Sábado</div></div>
+      <p><b>Sábado 21 de noviembre de 2026</b>, en vivo, con una ruleta en línea (Wheel of Names) y todos los números pagados. Pronto compartiré por dónde verlo.</p>
+    </div>
   </section>
 
-  <div class="progress" aria-live="polite">
-    <div class="progress-row"><span><b id="vendidos" class="num">0</b> de <span id="totalNums" class="num">100</span> apartados o vendidos</span><span id="quedan"></span></div>
-    <div class="bar"><i class="p" id="barP" style="width:0"></i><i class="a" id="barA" style="width:0"></i></div>
-  </div>
+  <section class="card" aria-labelledby="t-premios">
+    <h2 id="t-premios">Premios</h2>
+    <ol class="prizes">
+      <li><span class="medal m1" aria-label="Primer lugar">1°</span>Amazon Echo Dot</li>
+      <li><span class="medal m2" aria-label="Segundo lugar">2°</span>Audífonos Bluetooth</li>
+      <li><span class="medal m3" aria-label="Tercer lugar">3°</span>Tarjeta de regalo Amazon de $300 MXN</li>
+    </ol>
+    <p class="order">Se sortea en orden 3.º, 2.º y 1.º lugar; cada número ganador se retira de la ruleta antes del siguiente giro.</p>
+  </section>
 
-  <section class="panel">
-    <h2>Elige tus números</h2>
-    <p class="hint" id="hint">Toca uno o varios números disponibles.</p>
+  <section class="pay" aria-labelledby="t-pago">
+    <h2 id="t-pago">¿Apartaste y aún no envías tu comprobante?</h2>
+    <p>Solo participan en el sorteo los números con pago confirmado. Envíame tu comprobante con tu folio por WhatsApp.</p>
+    <a class="btn btn-wa" id="wa" target="_blank" rel="noopener"
+       href="https://wa.me/526861969291?text=Hola%2C%20te%20env%C3%ADo%20mi%20comprobante%20de%20la%20rifa.%20Mi%20folio%20es%3A%20">Enviar comprobante por WhatsApp</a>
+  </section>
+
+  <section class="card" id="numeros" aria-labelledby="t-num">
+    <h2 id="t-num">Números participantes</h2>
     <div class="legend">
-      <span><i class="sw l"></i>Disponible</span>
-      <span><i class="sw s"></i>Tu selección</span>
-      <span><i class="sw a"></i>Apartado</span>
-      <span><i class="sw p"></i>Vendido</span>
+      <span><i class="sw p"></i>Pago confirmado</span>
+      <span><i class="sw a"></i>Pago por confirmar</span>
+      <span><i class="sw l"></i>Sin asignar</span>
     </div>
-    <div class="grid" id="grid" role="group" aria-label="Números de la rifa"></div>
-    <div id="cerradaMsg" class="closed" hidden>La venta de números está cerrada.</div>
+    <div class="grid" id="grid" role="list" aria-label="Estado de los números"></div>
+    <p class="counts" id="counts" aria-live="polite"></p>
   </section>
 
-  <footer>
-    <span id="org"></span><br>
-    Tus datos solo se usan para contactarte sobre esta rifa y no se muestran públicamente.
-  </footer>
+  <footer>¡Gracias por tu apoyo!</footer>
 </div>
-
-<!-- Barra inferior -->
-<div class="dock" id="dock">
-  <div class="dock-in">
-    <div class="dock-txt"><b id="dockTotal">$0</b><span id="dockNums"></span></div>
-    <button class="btn btn-primary" id="btnApartar">Apartar</button>
-  </div>
-</div>
-
-<!-- Formulario -->
-<div class="overlay" id="ovForm" role="dialog" aria-modal="true" aria-labelledby="fTitle">
-  <div class="sheet">
-    <h3 id="fTitle">Aparta tus números</h3>
-    <div class="chips" id="fChips"></div>
-    <div class="total"><span>Total a pagar</span><b class="num" id="fTotal">$0</b></div>
-    <div class="err" id="fErr" role="alert"></div>
-    <form id="form" novalidate>
-      <label class="f" for="nombre">Nombre completo</label>
-      <input class="in" id="nombre" name="nombre" autocomplete="name" maxlength="60" required>
-      <label class="f" for="tel">Teléfono (WhatsApp, 10 dígitos)</label>
-      <input class="in" id="tel" name="tel" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" required>
-      <label class="check"><input type="checkbox" id="acepto">
-        <span>Acepto que mi nombre y teléfono se usen únicamente para contactarme sobre esta rifa.</span></label>
-      <div class="row">
-        <button type="button" class="btn btn-ghost" id="btnCancelar">Cancelar</button>
-        <button type="submit" class="btn btn-primary" id="btnEnviar"><span class="spin"></span><span class="lbl">Confirmar</span></button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Confirmación -->
-<div class="overlay" id="ovDone" role="dialog" aria-modal="true" aria-labelledby="dTitle">
-  <div class="sheet">
-    <div class="done-ic"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#1f8a5b" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <h3 id="dTitle">¡Listo!</h3>
-    <div>Tus números quedaron apartados.</div>
-    <div class="folio">Folio: <b id="dFolio"></b></div>
-    <div class="chips" id="dChips"></div>
-    <div class="pay">
-      <h4>Datos para pagar</h4>
-      <div id="dPay"></div>
-    </div>
-    <div class="warn" id="dVence"></div>
-    <div class="stack">
-      <a class="btn btn-wa btn-block" id="dWa" target="_blank" rel="noopener">Enviar comprobante por WhatsApp</a>
-      <button class="btn btn-ghost btn-block" id="btnListo">Listo</button>
-    </div>
-    <p class="hint" style="margin:12px 0 0;text-align:center">Toma captura de esta pantalla para conservar tu folio.</p>
-  </div>
-</div>
-
-<div class="toast" id="toast" role="status"></div>
 
 <script>
 (function () {
   'use strict';
-  var S = { cfg: null, nums: [], sel: [], cerrada: false, cargando: false, enviando: false, cells: {}, listo: false };
+  var API_URL = 'https://script.google.com/macros/s/AKfycbx4pkFWat5m-D9Rocsw0Bvh_r_bBy3w-Qo_mZF8TEME0jW8AWTzNFABAj6ATPMcE-fA/exec';
   var $ = function (id) { return document.getElementById(id); };
 
-  function pad(n) { var s = String(n), w = S.cfg ? S.cfg.ancho : 2; while (s.length < w) s = '0' + s; return s; }
-  function money(v) { return '$' + Number(v).toLocaleString('es-MX'); }
-  function estadoDe(n) { for (var i = 0; i < S.nums.length; i++) if (S.nums[i].n === n) return S.nums[i].e; return null; }
-  /* Servidor: la web app de Apps Script (la misma hoja de siempre).
-     Se llama sin cookies de Google (credentials: 'omit'), así que funciona en los
-     navegadores de Facebook/Instagram y con varias cuentas de Google abiertas. */
-  var API_URL = 'https://script.google.com/macros/s/AKfycbx4pkFWat5m-D9Rocsw0Bvh_r_bBy3w-Qo_mZF8TEME0jW8AWTzNFABAj6ATPMcE-fA/exec';
+  // Si alguna imagen no carga, se oculta sin dejar huecos.
+  $('portada').onerror = function () { this.hidden = true; };
+  $('retrato').onerror = function () { this.hidden = true; };
 
-  function api(fn, arg, ok, fail) {
-    var url = API_URL, opts;
-    if (fn === 'obtenerEstado') {
-      url += '?api=estado&_=' + Date.now();
-      opts = { method: 'GET' };
-    } else if (fn === 'reservar') {
-      // text/plain evita la verificación previa (preflight) que Apps Script no responde.
-      opts = { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-               body: JSON.stringify({ api: 'reservar', datos: arg }) };
-    } else { fail(new Error('acción desconocida')); return; }
-    opts.credentials = 'omit'; opts.redirect = 'follow'; opts.cache = 'no-store';
-
-    var terminado = false, ctrl = null, timer;
-    try { ctrl = new AbortController(); opts.signal = ctrl.signal; } catch (e) {}
-    timer = setTimeout(function () {
-      if (terminado) return; terminado = true;
-      try { if (ctrl) ctrl.abort(); } catch (e) {}
-      fail(new Error('tiempo agotado'));
-    }, 30000);
-
-    fetch(url, opts)
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
-      .then(function (t) {
-        var j; try { j = JSON.parse(t); } catch (e) { throw new Error('respuesta no válida'); }
-        if (terminado) return; terminado = true; clearTimeout(timer); ok(j);
-      })
-      .catch(function (e) {
-        if (terminado) return; terminado = true; clearTimeout(timer); fail(e);
-      });
-  }
-
-  /* ---------- Toast ---------- */
-  var tt;
-  function toast(msg) {
-    var t = $('toast'); t.textContent = msg; t.classList.add('on');
-    clearTimeout(tt); tt = setTimeout(function () { t.classList.remove('on'); }, 4200);
-  }
-
-  /* ---------- Carga ---------- */
   function skeleton() {
     var g = $('grid'); g.innerHTML = '';
-    for (var i = 0; i < 100; i++) { var b = document.createElement('div'); b.className = 'cell sk'; g.appendChild(b); }
+    for (var i = 0; i < 150; i++) { var c = document.createElement('div'); c.className = 'cell sk'; g.appendChild(c); }
   }
 
-  function cargar(silencioso) {
-    if (S.cargando || S.enviando) return;
-    S.cargando = true;
-    api('obtenerEstado', undefined, function (r) {
-      S.cargando = false;
-      if (!r || !r.config) { if (!silencioso) errorCarga(); return; }
-      var primera = !S.cfg;
-      S.cfg = r.config; S.cerrada = !!r.cerrada;
-      if (primera) { pintarEncabezado(); construirGrid(r.numeros); }
-      aplicarEstado(r.numeros);
-    }, function () {
-      S.cargando = false;
-      if (!silencioso || !S.cfg) errorCarga();
-    });
-  }
-
-  function errorCarga() {
-    if (S.cfg) { toast('No se pudo actualizar. Revisa tu conexión.'); return; }
+  function pintar(r) {
+    var lista = (r && r.numeros) || [];
+    if (!lista.length) { $('numeros').hidden = true; return; }
+    var ancho = (r.config && r.config.ancho) || 3;
     var g = $('grid'); g.innerHTML = '';
-    var d = document.createElement('div'); d.className = 'loaderr'; d.style.gridColumn = '1 / -1';
-    d.appendChild(document.createTextNode('No se pudieron cargar los números. '));
-    var b = document.createElement('button'); b.className = 'btn btn-ghost'; b.textContent = 'Reintentar';
-    b.style.marginTop = '10px';
-    b.onclick = function () { skeleton(); cargar(false); };
-    d.appendChild(document.createElement('br')); d.appendChild(b); g.appendChild(d);
-  }
-
-  function pintarEncabezado() {
-    var c = S.cfg;
-    document.title = c.titulo;
-    $('titulo').textContent = c.titulo;
-    var ol = $('premios'); ol.innerHTML = '';
-    (c.premios || []).forEach(function (p, i) {
-      var li = document.createElement('li');
-      var m = document.createElement('span');
-      m.className = 'medal ' + (i < 3 ? 'm' + (i + 1) : 'mx');
-      m.textContent = (i + 1) + '°';
-      m.setAttribute('aria-label', 'Lugar ' + (i + 1));
-      li.appendChild(m); li.appendChild(document.createTextNode(p)); ol.appendChild(li);
-    });
-    $('precio').textContent = money(c.precio);
-    $('fecha').textContent = c.fechaSorteo;
-    $('metodo').textContent = c.metodoSorteo;
-    $('org').textContent = 'Organiza: ' + c.organizador;
-    $('orgNombre').textContent = c.organizador;
-    if (c.causa) { $('causa').textContent = c.causa; $('causa').hidden = false; }
-    var img = c.imagenes || {};
-    if (c.causa || img.retrato) { $('orgCard').hidden = false; $('org').textContent = ''; }
-    if (img.portada) cargarImagen('portada', 'Carátula');
-    if (img.retrato) cargarImagen('retrato', 'Retrato de ' + c.organizador);
-    $('hint').textContent = 'Toca uno o varios números disponibles (máximo ' + c.maxPorApartado + ' por apartado).';
-  }
-
-  /* Imágenes: se piden después de la cuadrícula para no retrasarla; si fallan, no se muestran. */
-  /* En GitHub Pages las imágenes viven junto a esta página: portada.jpg y retrato.jpg. */
-  function cargarImagen(cual, alt) {
-    var el = $(cual); el.alt = alt;
-    el.onload = function () { el.hidden = false; };
-    el.onerror = function () {
-      if (cual === 'retrato' && !S.cfg.causa) { $('orgCard').hidden = true; $('org').textContent = 'Organiza: ' + S.cfg.organizador; }
-    };
-    el.src = cual + '.jpg';
-  }
-
-  function construirGrid(lista) {
-    var g = $('grid'); g.innerHTML = ''; S.cells = {};
-    lista.forEach(function (x) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'cell num'; b.textContent = pad(x.n);
-      b.dataset.n = x.n;
-      b.addEventListener('click', function () { alternar(x.n); });
-      S.cells[x.n] = b; g.appendChild(b);
-    });
-    $('totalNums').textContent = lista.length;
-  }
-
-  function aplicarEstado(lista) {
-    if (!lista) return;
-    S.nums = lista;
-    var perdidos = S.sel.filter(function (n) { return estadoDe(n) !== 'L'; });
-    if (perdidos.length) {
-      S.sel = S.sel.filter(function (n) { return perdidos.indexOf(n) < 0; });
-      toast((perdidos.length === 1 ? 'El ' + pad(perdidos[0]) + ' ya no está disponible.' :
-        'Ya no están disponibles: ' + perdidos.map(pad).join(', ') + '.'));
-    }
     var p = 0, a = 0;
     lista.forEach(function (x) {
+      var s = String(x.n); while (s.length < ancho) s = '0' + s;
+      var c = document.createElement('div');
+      c.className = 'cell num' + (x.e === 'P' ? ' p' : x.e === 'A' ? ' a' : '');
+      c.setAttribute('role', 'listitem');
+      c.setAttribute('aria-label', 'Número ' + s + ': ' + (x.e === 'P' ? 'pago confirmado' : x.e === 'A' ? 'pago por confirmar' : 'sin asignar'));
+      c.textContent = s;
+      g.appendChild(c);
       if (x.e === 'P') p++; else if (x.e === 'A') a++;
-      var b = S.cells[x.n]; if (!b) return;
-      var sel = S.sel.indexOf(x.n) >= 0;
-      b.className = 'cell num' + (x.e === 'P' ? ' p' : x.e === 'A' ? ' a' : sel ? ' sel' : '');
-      b.disabled = x.e !== 'L' || S.cerrada;
-      b.setAttribute('aria-pressed', sel ? 'true' : 'false');
-      b.setAttribute('aria-label', 'Número ' + pad(x.n) + ', ' +
-        (x.e === 'P' ? 'vendido' : x.e === 'A' ? 'apartado' : sel ? 'seleccionado' : 'disponible'));
     });
-    var total = lista.length || 1, libres = lista.length - p - a;
-    $('vendidos').textContent = p + a;
-    $('barP').style.width = (p / total * 100) + '%';
-    $('barA').style.width = (a / total * 100) + '%';
-    $('quedan').textContent = libres === 0 ? '¡Agotado!' : 'Quedan ' + libres;
-    $('cerradaMsg').hidden = !S.cerrada;
-    actualizarDock();
+    $('counts').innerHTML = '';
+    var t = document.createElement('span');
+    t.innerHTML = '<b class="num"></b> con pago confirmado' ;
+    t.querySelector('b').textContent = p;
+    $('counts').appendChild(t);
+    if (a) $('counts').appendChild(document.createTextNode(' · ' + a + ' por confirmar'));
   }
 
-  /* ---------- Selección ---------- */
-  function alternar(n) {
-    if (S.cerrada || estadoDe(n) !== 'L') return;
-    var i = S.sel.indexOf(n);
-    if (i >= 0) S.sel.splice(i, 1);
-    else {
-      if (S.sel.length >= S.cfg.maxPorApartado) { toast('Máximo ' + S.cfg.maxPorApartado + ' números por apartado.'); return; }
-      S.sel.push(n);
-    }
-    S.sel.sort(function (a, b) { return a - b; });
-    aplicarEstado(S.nums);
+  function cargar() {
+    var hecho = false, ctrl = null, opts = { method: 'GET', credentials: 'omit', redirect: 'follow', cache: 'no-store' };
+    try { ctrl = new AbortController(); opts.signal = ctrl.signal; } catch (e) {}
+    var timer = setTimeout(function () { if (hecho) return; hecho = true; try { if (ctrl) ctrl.abort(); } catch (e) {} falla(); }, 30000);
+    fetch(API_URL + '?api=estado&_=' + Date.now(), opts)
+      .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+      .then(function (j) { if (hecho) return; hecho = true; clearTimeout(timer); pintar(j); })
+      .catch(function () { if (hecho) return; hecho = true; clearTimeout(timer); falla(); });
   }
-
-  function actualizarDock() {
-    var on = S.sel.length > 0 && !S.cerrada;
-    $('dock').classList.toggle('on', on);
-    if (!S.cfg) return;
-    $('dockTotal').textContent = money(S.sel.length * S.cfg.precio);
-    $('dockNums').textContent = S.sel.length + (S.sel.length === 1 ? ' número: ' : ' números: ') + S.sel.map(pad).join(', ');
-  }
-
-  function chips(el, nums, cls) {
-    el.innerHTML = '';
-    nums.forEach(function (n) { var c = document.createElement('span'); c.className = 'chip num' + (cls ? ' ' + cls : ''); c.textContent = pad(n); el.appendChild(c); });
-  }
-
-  /* ---------- Modales ---------- */
-  function abrir(id) { $(id).classList.add('on'); document.body.classList.add('lock'); }
-  function cerrar(id) { $(id).classList.remove('on'); if (!document.querySelector('.overlay.on')) document.body.classList.remove('lock'); }
-
-  function abrirForm() {
-    if (!S.sel.length) return;
-    chips($('fChips'), S.sel);
-    $('fTotal').textContent = money(S.sel.length * S.cfg.precio);
-    mostrarErr('');
-    abrir('ovForm');
-    setTimeout(function () { if (!$('nombre').value) $('nombre').focus(); }, 60);
-  }
-
-  function mostrarErr(msg) { var e = $('fErr'); e.textContent = msg; e.classList.toggle('on', !!msg); }
-
-  function soloDigitos(s) { return String(s || '').replace(/\D/g, ''); }
-  function normTel(s) {
-    var t = soloDigitos(s);
-    if (t.length === 13 && t.indexOf('521') === 0) t = t.slice(3);
-    else if (t.length === 12 && t.indexOf('52') === 0) t = t.slice(2);
-    return t;
-  }
-
-  function enviar(ev) {
-    ev.preventDefault();
-    if (S.enviando) return;
-    var nombre = $('nombre').value.replace(/\s+/g, ' ').trim();
-    var tel = normTel($('tel').value);
-    if (nombre.length < 3) { mostrarErr('Escribe tu nombre completo.'); $('nombre').focus(); return; }
-    if (tel.length !== 10) { mostrarErr('El teléfono debe tener 10 dígitos.'); $('tel').focus(); return; }
-    if (!$('acepto').checked) { mostrarErr('Necesitamos tu autorización para usar tus datos de contacto.'); return; }
-    if (!S.sel.length) { cerrar('ovForm'); return; }
-
-    S.enviando = true; mostrarErr('');
-    var btn = $('btnEnviar'); btn.disabled = true; btn.classList.add('busy'); btn.querySelector('.lbl').textContent = 'Apartando…';
-    var fin = function () { S.enviando = false; btn.disabled = false; btn.classList.remove('busy'); btn.querySelector('.lbl').textContent = 'Confirmar'; };
-
-    api('reservar', { numeros: S.sel.slice(), nombre: nombre, telefono: tel }, function (r) {
-      fin();
-      if (r && r.ok) { exito(r); return; }
-      r = r || {};
-      if (r.motivo === 'ocupados') {
-        aplicarEstado(r.estado);
-        if (!S.sel.length) { cerrar('ovForm'); toast(r.mensaje + ' Elige otros números.'); return; }
-        chips($('fChips'), S.sel);
-        $('fTotal').textContent = money(S.sel.length * S.cfg.precio);
-        mostrarErr(r.mensaje + ' Los quitamos de tu selección; puedes confirmar los demás.');
-        return;
-      }
-      if (r.motivo === 'cerrada') { S.cerrada = true; aplicarEstado(S.nums); cerrar('ovForm'); toast(r.mensaje); return; }
-      mostrarErr(r.mensaje || 'No se pudo completar. Intenta de nuevo.');
-    }, function () {
-      fin();
-      mostrarErr('No se pudo conectar. Revisa tu internet y vuelve a tocar Confirmar; si tus números ya se apartaron, te mostraremos tu folio.');
-    });
-  }
-
-  function exito(r) {
-    S.sel = [];
-    aplicarEstado(r.estado);
-    cerrar('ovForm');
-    $('acepto').checked = false;
-    var primer = r.nombre.split(' ')[0];
-    $('dTitle').textContent = '¡Listo, ' + primer + '!';
-    $('dFolio').textContent = r.folio;
-    chips($('dChips'), r.numeros, 'ok');
-
-    var pay = $('dPay'); pay.innerHTML = '';
-    var filas = [['Total', money(r.total), false]];
-    if (r.pago.BANCO) filas.push(['Banco', r.pago.BANCO, false]);
-    if (r.pago.TITULAR) filas.push(['Titular', r.pago.TITULAR, false]);
-    if (r.pago.CLABE) filas.push(['CLABE', r.pago.CLABE, true]);
-    if (r.pago.TARJETA) filas.push(['Tarjeta', r.pago.TARJETA, true]);
-    filas.push(['Concepto', r.folio, true]);
-    filas.forEach(function (f) {
-      var row = document.createElement('div'); row.className = 'pay-row';
-      var k = document.createElement('span'); k.textContent = f[0];
-      var v = document.createElement('b'); v.className = 'mono'; v.textContent = f[1];
-      row.appendChild(k);
-      var right = document.createElement('div'); right.style.cssText = 'display:flex;align-items:center;gap:8px;min-width:0';
-      right.appendChild(v);
-      if (f[2]) {
-        var c = document.createElement('button'); c.type = 'button'; c.className = 'copy'; c.textContent = 'Copiar';
-        c.onclick = function () { copiar(f[1], c); };
-        right.appendChild(c);
-      }
-      row.appendChild(right); pay.appendChild(row);
-    });
-
-    var vence = $('dVence');
-    if (r.vence) {
-      var d = new Date(r.vence);
-      vence.textContent = 'Tienes hasta el ' +
-        d.toLocaleString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) +
-        ' para pagar; si no se registra el pago, los números se liberan automáticamente.';
-      vence.hidden = false;
-    } else vence.hidden = true;
-
-    var msg = 'Hola, aparté los números ' + r.numeros.map(pad).join(', ') + ' de la rifa (folio ' + r.folio +
-      ') a nombre de ' + r.nombre + '. Total: ' + money(r.total) + '. Te envío mi comprobante de pago.';
-    $('dWa').href = 'https://wa.me/' + S.cfg.whatsapp + '?text=' + encodeURIComponent(msg);
-    abrir('ovDone');
-  }
-
-  function copiar(txt, btn) {
-    var hecho = function () { btn.textContent = 'Copiado'; btn.classList.add('ok'); setTimeout(function () { btn.textContent = 'Copiar'; btn.classList.remove('ok'); }, 1800); };
-    var respaldo = function () {
-      var ta = document.createElement('textarea'); ta.value = txt; ta.setAttribute('readonly', '');
-      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0'; document.body.appendChild(ta);
-      ta.select(); ta.setSelectionRange(0, txt.length);
-      var ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
-      document.body.removeChild(ta);
-      if (ok) hecho(); else toast('Mantén presionado el dato para copiarlo.');
-    };
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(hecho, respaldo);
-      else respaldo();
-    } catch (e) { respaldo(); }
-  }
-
-  /* ---------- Eventos ---------- */
-  $('btnApartar').addEventListener('click', abrirForm);
-  $('btnCancelar').addEventListener('click', function () { if (!S.enviando) cerrar('ovForm'); });
-  $('form').addEventListener('submit', enviar);
-  $('btnListo').addEventListener('click', function () { cerrar('ovDone'); cargar(true); });
-  $('tel').addEventListener('input', function () { var v = this.value.replace(/[^\d\s+()-]/g, ''); if (v !== this.value) this.value = v; });
-  $('ovForm').addEventListener('click', function (e) { if (e.target === this && !S.enviando) cerrar('ovForm'); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !S.enviando) cerrar('ovForm'); });
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible' && S.cfg) cargar(true); });
-  setInterval(function () { if (document.visibilityState === 'visible' && S.cfg) cargar(true); }, 15000);
+  // Sin conexión con el servidor: el agradecimiento se ve igual; solo se oculta la cuadrícula.
+  function falla() { if (!$('grid').querySelector('.cell:not(.sk)')) $('numeros').hidden = true; }
 
   skeleton();
-  cargar(false);
+  cargar();
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') cargar(); });
 })();
 </script>
 </body>
